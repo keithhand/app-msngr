@@ -34,6 +34,25 @@ you can use the `logs` command.
 app logs
 ```
 
+## Config
+
+<details>
+<summary>Full Configuration Example</summary>
+
+```yaml
+helm:
+  repo: https://helm.nginx.com/stable
+  chart: nginx-ingress
+kubernetes:
+  context: dev-cluster
+  namespace: default
+  logContainers:
+    labels:
+      - app.kubernetes.io/component: controller
+```
+
+</details>
+
 ## Commands
 
 - `app create`: Install an application.
