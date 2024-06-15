@@ -6,15 +6,11 @@ type Config struct {
 	LongDesc  string
 }
 
-type Commander interface {
-	AttachCommands(...Commander)
-	Run() error
+type Command interface {
+	AddCommand(...Command)
+	Execute() error
 }
 
-func NewCommand(cfg Config) Commander {
-	return newCobraCommand(Config{
-		Verb:      cfg.Verb,
-		ShortDesc: cfg.ShortDesc,
-		LongDesc:  cfg.LongDesc,
-	})
+func New(cfg Config) Command {
+	return CobraCommand(cfg)
 }

@@ -4,7 +4,7 @@ import "khand.dev/msngr/pkg/cmd"
 
 var (
 	slogan = "Keep the talking with your applications short"
-	appCmd = cmd.NewCommand(cmd.Config{
+	appCmd = cmd.New(cmd.Config{
 		Verb:      "app",
 		ShortDesc: slogan,
 		LongDesc: slogan + ".\n" + `
@@ -13,6 +13,6 @@ var (
 	})
 )
 
-func AppCmd() cmd.Commander {
+func AppCmd() cmd.Command {
 	return appCmd
 }

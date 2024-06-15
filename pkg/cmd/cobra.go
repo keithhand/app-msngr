@@ -6,7 +6,7 @@ type cobraCommand struct {
 	*cobra.Command
 }
 
-func newCobraCommand(cfg Config) *cobraCommand {
+func CobraCommand(cfg Config) *cobraCommand {
 	return &cobraCommand{
 		&cobra.Command{
 			Use:   cfg.Verb,
@@ -16,12 +16,8 @@ func newCobraCommand(cfg Config) *cobraCommand {
 	}
 }
 
-func (cmd *cobraCommand) Run() error {
-	return cmd.Command.Execute()
-}
-
-func (cmd *cobraCommand) AttachCommands(cmds ...Commander) {
-	for _, c := range cmds {
-		cmd.Command.AddCommand(c.(*cobraCommand).Command)
+func (c *cobraCommand) AddCommand(cc ...Command) {
+	for _, cmd := range cc {
+		c.Command.AddCommand(cmd.(*cobraCommand).Command)
 	}
 }
