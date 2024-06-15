@@ -1,15 +1,14 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
-	"khand.dev/msngr/cmd/app/cmd"
+	"khand.dev/msngr/pkg/cmd/app"
 )
 
 func main() {
-	cli := cmd.MainCmd()
+	cli := app.AppCmd()
 	if err := cli.Run(); err != nil {
-		fmt.Fprintf(os.Stderr, "An error occurred: %v\n", err)
+		os.Exit(1)
 	}
 }

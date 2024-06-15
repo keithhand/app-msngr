@@ -2,29 +2,26 @@ package cmd
 
 import "github.com/spf13/cobra"
 
-type cobraCommander struct {
-	cmd *cobra.Command
+type cobraCommand struct {
+	*cobra.Command
 }
 
-func CobraCommander() *cobraCommander {
-	return &cobraCommander{}
-}
-
-func (c *cobraCommander) AttachCommands(cmds ...Commander) {
-	for _, cmd := range cmds {
-		c.cmd.AddCommand(cmd.(*cobraCommander).cmd)
-	}
-}
-
-func (c *cobraCommander) Run() error {
-	return c.cmd.Execute()
-}
-
-func (c *cobraCommander) Command(cfg Config) Commander {
-	return &cobraCommander{
-		cmd: &cobra.Command{
+func newCobraCommand(cfg Config) *cobraCommand {
+	return &cobraCommand{
+		&cobra.Command{
 			Use:   cfg.Verb,
 			Short: cfg.ShortDesc,
 			Long:  cfg.LongDesc,
-		}}
+		},
+	}
+}
+
+func (cmd *cobraCommand) Run() error {
+	return cmd.Command.Execute()
+}
+
+func (cmd *cobraCommand) AttachCommands(cmds ...Commander) {
+	for _, c := range cmds {
+		cmd.Command.AddCommand(c.(*cobraCommand).Command)
+	}
 }

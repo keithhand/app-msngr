@@ -7,7 +7,14 @@ type Config struct {
 }
 
 type Commander interface {
-	Command(Config) Commander
 	AttachCommands(...Commander)
 	Run() error
+}
+
+func NewCommand(cfg Config) Commander {
+	return newCobraCommand(Config{
+		Verb:      cfg.Verb,
+		ShortDesc: cfg.ShortDesc,
+		LongDesc:  cfg.LongDesc,
+	})
 }
