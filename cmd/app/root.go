@@ -19,7 +19,7 @@ var (
 	}
 )
 
-func Execute() error {
+func RootCmd() error {
 	if err := appCmd.Execute(); err != nil {
 		log.Panicf("uhoh, %s", err.Error())
 	}
