@@ -1,14 +1,13 @@
 package main
 
 import (
-	"os"
+	"log"
 
 	"khand.dev/msngr/pkg/cmd/app"
 )
 
 func main() {
-	cli := app.AppCmd()
-	if err := cli.Execute(); err != nil {
-		os.Exit(1)
+	if err := app.Execute(); err != nil {
+		log.Fatalf("unhandled exception, %s", err.Error())
 	}
 }
