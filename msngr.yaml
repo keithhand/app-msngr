@@ -1,0 +1,10 @@
+helm:
+  name: test
+  chart: nginx-ingress
+  repo: https://helm.nginx.com/stable
+kubernetes:
+  context: dev-cluster
+  namespace: default
+  logContainers:
+    labels:
+      - app.kubernetes.io/component: controller
