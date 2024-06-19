@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	if err := app.RootCmd(); err != nil {
+	app := app.RootCmd()
+	if err := app.Execute(); err != nil {
 		log.Fatalf("unhandled exception, %s", err.Error())
 	}
 }

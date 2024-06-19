@@ -1,10 +1,6 @@
 package app
 
-import (
-	"log"
-
-	"github.com/spf13/cobra"
-)
+import "github.com/spf13/cobra"
 
 type Command = cobra.Command
 
@@ -19,9 +15,6 @@ var (
 	}
 )
 
-func RootCmd() error {
-	if err := appCmd.Execute(); err != nil {
-		log.Panicf("uhoh, %s", err.Error())
-	}
-	return nil
+func RootCmd() *Command {
+	return appCmd
 }
